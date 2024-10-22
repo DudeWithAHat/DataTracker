@@ -2,22 +2,20 @@
 #include <string>
 #include <iostream>
 
-//template<typename T>
+template<typename T>
 class StatColumn {
-    private:
     public:
         std::string columnHeader;
-        //std::vector<T> records;  
-        std::vector<float> records;  
-        StatColumn(std::string& columnHeader, std::vector<float>& records){
+        std::vector<T> records;  
+        StatColumn(std::string& columnHeader, std::vector<T>& records){
             this->columnHeader = columnHeader;
             this->records = records;
         }
         void addRecord(float record){
             records.push_back(record);
         }
-        std::vector<float>& getRecords(){
-            return records;
+        decltype(auto) getRecords(){
+            return (records);
         }
 };
 
