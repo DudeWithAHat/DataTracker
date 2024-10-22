@@ -2,20 +2,21 @@
 #include <string>
 #include <iostream>
 
-template<typename T>
+//template<typename T>
 class StatColumn {
     private:
-        std::string columnHeader;
-        std::vector<T> records;  
     public:
-        StatColumn(std::string& columnHeader, std::vector<T>& records){
+        std::string columnHeader;
+        //std::vector<T> records;  
+        std::vector<float> records;  
+        StatColumn(std::string& columnHeader, std::vector<float>& records){
             this->columnHeader = columnHeader;
             this->records = records;
         }
-        void addRecord(T record){
-            this->records.push_back(record);
+        void addRecord(float record){
+            records.push_back(record);
         }
-        const auto getRecords() -> decltype(records){
+        std::vector<float>& getRecords(){
             return records;
         }
 };
@@ -23,12 +24,16 @@ class StatColumn {
 int main(){
     std::string h1 = "Weight";
     std::vector<float> v1{};
-    StatColumn<float> s1{h1, v1};
+    StatColumn s1{h1, v1};
     s1.addRecord(114.1);
     s1.addRecord(115.2);
-    std::vector<float> v2 = s1.getRecords();
-    for(int i = 0; i < v2.size(); i++){
-        std::cout << v2[i] << " ";
+    std::vector<float>& v2 = s1.getRecords();
+    v2[1] = 5.0;
+    std::cout << &s1.records << std::endl;
+    std::cout << &v2 << std::endl;
+    auto v3 = s1.getRecords();
+    for(int i = 0; i < v3.size(); i++){
+        std::cout << v3[i] << ' ';
     }
     std::cout << std::endl;
     return 0;
