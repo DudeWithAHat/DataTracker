@@ -33,33 +33,22 @@ const std::vector<MenuItem> MENU_ITEMS{
     {0, "Exit the Program"}
 };
 
-void print_menu_items(std::vector<MenuItem> menuItems);
+bool id_in_menu(std::vector<MenuItem> menuItems, int id);
+void print_menu_options(std::vector<MenuItem> menuItems);
+int get_menu_option(std::vector<MenuItem> menuItems);
+
+int main(){
+    int input = get_menu_option();
+    std::cout << "Option Selected: " << input << std::endl;
+    return 0;
+}
 
 bool id_in_menu(std::vector<MenuItem> menuItems, int id){
     bool found = std::any_of(menuItems.begin(), menuItems.end(), [id](MenuItem item) { return id == item.id; });
     return found;
 };
 
-int print_menu(std::vector<MenuItem> menuItems = MENU_ITEMS)
-{
-    int userInput;
-    print_menu_items(menuItems);
-
-    std::cin >> userInput;
-    while( !(std::cin.good() &&  id_in_menu(menuItems, userInput)) )
-{
-        std::cout << "Error: Invalid Console input. Please enter a valid number that is present in the menu." << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // stop ignoring characters past the first newline encountered.
-        print_menu_items(menuItems);
-        std::cin >> userInput;
-    }
-
-    std::cout << "Valid entry accepted: " << userInput << std::endl;
-    return userInput;
-}
-
-void print_menu_items(std::vector<MenuItem> menuItems)
+void print_menu_options(std::vector<MenuItem> menuItems)
 {
     for (MenuItem item : menuItems)
     {
@@ -68,8 +57,21 @@ void print_menu_items(std::vector<MenuItem> menuItems)
     std::cout << std::endl;
 };
 
-int main(){
-    int input = print_menu();
-    std::cout << "Option Selected: " << input << std::endl;
-    return 0;
+int get_menu_option(std::vector<MenuItem> menuItems = MENU_ITEMS)
+{
+    int userInput;
+    print_menu_options(menuItems);
+
+    std::cin >> userInput;
+    while( !(std::cin.good() &&  id_in_menu(menuItems, userInput)) )
+{
+        std::cout << "Error: Invalid Console input. Please enter a valid number that is present in the menu." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // stop ignoring characters past the first newline encountered.
+        print_menu_options(menuItems);
+        std::cin >> userInput;
+    }
+
+    std::cout << "Valid entry accepted: " << userInput << std::endl;
+    return userInput;
 }
