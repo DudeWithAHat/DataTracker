@@ -11,9 +11,9 @@ class StatColumn {
             this->header = header;
             this->records = records;
         }
-        //void addRecord(float record){
-        //    records.push_back(record);
-        //}
+        void addRecord(float record){
+            records.push_back(record);
+        }
         std::string getHeader(){
             return header;
         }
