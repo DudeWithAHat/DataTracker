@@ -8,13 +8,6 @@ struct MenuItem{
     std::string description;
 };
 
-const std::vector<MenuItem> MENU_ITEMS{
-    {1, "Add Record"},
-    {2, "Display Current Records"},
-    {3, "Display Record Values"},
-    {0, "Exit the Program"}
-};
-
 bool id_in_menu(std::vector<MenuItem> menuItems, int id){
     bool found = std::any_of(menuItems.begin(), menuItems.end(), [id](MenuItem item) { return id == item.id; });
     return found;
@@ -29,7 +22,7 @@ void print_menu_options(std::vector<MenuItem> menuItems)
     std::cout << std::endl;
 };
 
-int get_menu_option(std::vector<MenuItem> menuItems = MENU_ITEMS)
+int get_menu_option(std::vector<MenuItem> menuItems)
 {
     int userInput;
     print_menu_options(menuItems);
@@ -44,6 +37,5 @@ int get_menu_option(std::vector<MenuItem> menuItems = MENU_ITEMS)
         std::cin >> userInput;
     }
 
-    std::cout << "Valid entry accepted: " << userInput << std::endl;
     return userInput;
 }

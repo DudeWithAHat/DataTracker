@@ -3,17 +3,21 @@
 
 template<typename T>
 class StatColumn {
-    public:
-        std::string columnHeader;
+    private:
+        std::string header;
         std::vector<T> records;  
-        StatColumn(std::string& columnHeader, std::vector<T>& records){
-            this->columnHeader = columnHeader;
+    public:
+        StatColumn(std::string header, std::vector<T> records){
+            this->header = header;
             this->records = records;
         }
-        void addRecord(float record){
-            records.push_back(record);
+        //void addRecord(float record){
+        //    records.push_back(record);
+        //}
+        std::string getHeader(){
+            return header;
         }
-        decltype(auto) getRecords(){
-            return (records);
+        std::vector<T> getRecords(){
+            return records;
         }
 };
